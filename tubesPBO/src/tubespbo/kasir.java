@@ -12,6 +12,16 @@ import javax.swing.JFrame;
  * @author samNOLIMIT
  */
 public class kasir extends javax.swing.JFrame {
+    public void kosongkan_form(){
+        namaPelangganText.setText(null);
+        beratPakaianText.setText(null);
+        hargaText.setText(null);
+    }
+    
+    public void tampilKasirInput(){
+        
+    }
+    
 
     /**
      * Creates new form kasir
@@ -46,9 +56,8 @@ public class kasir extends javax.swing.JFrame {
         beratPakaianText = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         btnConvert = new javax.swing.JButton();
-        HargaText = new javax.swing.JScrollPane();
-        jTextPane2 = new javax.swing.JTextPane();
         btnInputKasir = new javax.swing.JButton();
+        hargaText = new javax.swing.JTextField();
         updatePanel = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -125,8 +134,6 @@ public class kasir extends javax.swing.JFrame {
 
         btnConvert.setIcon(new javax.swing.ImageIcon("C:\\Users\\samNOLIMIT\\Documents\\TUBES PBO\\logo\\icons8-currency-exchange-24.png")); // NOI18N
 
-        HargaText.setViewportView(jTextPane2);
-
         btnInputKasir.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         btnInputKasir.setText("INPUT");
 
@@ -150,14 +157,14 @@ public class kasir extends javax.swing.JFrame {
                             .addComponent(namaPelangganText)
                             .addComponent(beratPakaianText, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
                             .addGroup(inputPanelLayout.createSequentialGroup()
-                                .addComponent(HargaText, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnConvert, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, inputPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnInputKasir, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(57, 57, 57)))
+                                .addComponent(hargaText, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnConvert, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))))
                 .addContainerGap(207, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, inputPanelLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnInputKasir, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(244, 244, 244))
         );
         inputPanelLayout.setVerticalGroup(
             inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -177,13 +184,13 @@ public class kasir extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(btnConvert))
                     .addGroup(inputPanelLayout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(HargaText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5))))
-                .addGap(28, 28, 28)
+                        .addGap(30, 30, 30)
+                        .addGroup(inputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(hargaText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(18, 18, 18)
                 .addComponent(btnInputKasir, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         mainKasir.add(inputPanel, "card2");
@@ -340,13 +347,13 @@ public class kasir extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane HargaText;
     private javax.swing.JTextField beratPakaianText;
     private javax.swing.JPanel bodyKasir;
     private javax.swing.JButton btnConvert;
     private javax.swing.JButton btnInput;
     private javax.swing.JButton btnInputKasir;
     private javax.swing.JButton btnUpdate;
+    private javax.swing.JTextField hargaText;
     private javax.swing.JPanel inputPanel;
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox jComboBox1;
@@ -358,7 +365,6 @@ public class kasir extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JTextPane jTextPane2;
     private javax.swing.JPanel mainKasir;
     private javax.swing.JPanel menuKasir;
     private javax.swing.JTextField namaPelangganText;
