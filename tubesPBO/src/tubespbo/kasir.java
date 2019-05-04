@@ -5,6 +5,8 @@
  */
 package tubespbo;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author samNOLIMIT
@@ -16,6 +18,9 @@ public class kasir extends javax.swing.JFrame {
      */
     public kasir() {
         initComponents();
+        setExtendedState(JFrame.MAXIMIZED_HORIZ);
+        setVisible(true);
+        setResizable(false);
     }
 
     /**
@@ -46,8 +51,11 @@ public class kasir extends javax.swing.JFrame {
         btnInputKasir = new javax.swing.JButton();
         updatePanel = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jLabel7 = new javax.swing.JLabel();
+        tampilNoAntrian = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox();
+        jButton1 = new javax.swing.JButton();
 
         bodyKasir.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -56,9 +64,19 @@ public class kasir extends javax.swing.JFrame {
 
         btnUpdate.setIcon(new javax.swing.ImageIcon("C:\\Users\\samNOLIMIT\\Documents\\TUBES PBO\\logo\\icons8-update-24.png")); // NOI18N
         btnUpdate.setText("UPDATE");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
 
         btnInput.setIcon(new javax.swing.ImageIcon("C:\\Users\\samNOLIMIT\\Documents\\TUBES PBO\\logo\\icons8-text-input-form-24 (1).png")); // NOI18N
         btnInput.setText("INPUT");
+        btnInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInputActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         jLabel1.setText("Kasir Laundry");
@@ -175,21 +193,52 @@ public class kasir extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         jLabel6.setText("update data");
 
+        jLabel7.setFont(new java.awt.Font("Century Gothic", 1, 11)); // NOI18N
+        jLabel7.setText("NO ANTRIAN");
+
+        jLabel8.setFont(new java.awt.Font("Century Gothic", 1, 11)); // NOI18N
+        jLabel8.setText("UPDATE STATUS");
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "SELESAI", "BELUM SELESAI" }));
+
+        jButton1.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        jButton1.setText("UPDATE");
+
         javax.swing.GroupLayout updatePanelLayout = new javax.swing.GroupLayout(updatePanel);
         updatePanel.setLayout(updatePanelLayout);
         updatePanelLayout.setHorizontalGroup(
             updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(updatePanelLayout.createSequentialGroup()
-                .addGap(261, 261, 261)
-                .addComponent(jLabel6)
-                .addContainerGap(284, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(updatePanelLayout.createSequentialGroup()
+                        .addGroup(updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tampilNoAntrian, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel6)
+                    .addComponent(jButton1))
+                .addContainerGap(482, Short.MAX_VALUE))
         );
         updatePanelLayout.setVerticalGroup(
             updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(updatePanelLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addContainerGap()
                 .addComponent(jLabel6)
-                .addContainerGap(262, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(tampilNoAntrian, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addContainerGap(153, Short.MAX_VALUE))
         );
 
         mainKasir.add(updatePanel, "card3");
@@ -228,6 +277,32 @@ public class kasir extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInputActionPerformed
+        // TODO add your handling code here:
+        //REMOVE PANEL
+        mainKasir.removeAll();
+        mainKasir.repaint();
+        mainKasir.revalidate();
+        
+        //add panel
+        mainKasir.add(inputPanel);
+        mainKasir.repaint();
+        mainKasir.revalidate();
+    }//GEN-LAST:event_btnInputActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        // TODO add your handling code here:
+        //REMOVE PANEL
+        mainKasir.removeAll();
+        mainKasir.repaint();
+        mainKasir.revalidate();
+        
+        //add panel
+        mainKasir.add(updatePanel);
+        mainKasir.repaint();
+        mainKasir.revalidate();
+    }//GEN-LAST:event_btnUpdateActionPerformed
 
     /**
      * @param args the command line arguments
@@ -273,16 +348,21 @@ public class kasir extends javax.swing.JFrame {
     private javax.swing.JButton btnInputKasir;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JPanel inputPanel;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JTextPane jTextPane2;
     private javax.swing.JPanel mainKasir;
     private javax.swing.JPanel menuKasir;
     private javax.swing.JTextField namaPelangganText;
+    private javax.swing.JTextField tampilNoAntrian;
     private javax.swing.JPanel updatePanel;
     // End of variables declaration//GEN-END:variables
 }
