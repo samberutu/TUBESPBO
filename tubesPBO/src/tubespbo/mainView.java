@@ -6,8 +6,16 @@
 package tubespbo;
 
 import java.awt.Frame;
+import java.sql.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import static tubespbo.konfig.koneksi;
 
+import koneksi.conek;
 /**
  *
  * @author samNOLIMIT
@@ -49,8 +57,8 @@ public class mainView extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jTextField1 = new javax.swing.JTextField();
+        passText = new javax.swing.JPasswordField();
+        usernameText = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -196,11 +204,11 @@ public class mainView extends javax.swing.JFrame {
                             .addGroup(loginPanelLayout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(passText, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(loginPanelLayout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField1)))))
+                                .addComponent(usernameText)))))
                 .addContainerGap(256, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, loginPanelLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -215,11 +223,11 @@ public class mainView extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel6)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(usernameText, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(passText, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
                 .addContainerGap(103, Short.MAX_VALUE))
@@ -297,9 +305,23 @@ public class mainView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTentangActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        kasir u = new kasir();
-        u.setVisible(true);
+        try {
+            // TODO add your handling code here:
+            
+            String log =("select * from login where username='"+usernameText.getText()+"' and password='"+passText.getText()+"'");
+            Statement conn =(Statement) conek.GetConnection().createStatement();
+            ResultSet login = conn.executeQuery(log);
+            if(login.next()){
+                kasir u = new kasir();
+                u.setVisible(true);
+            }else{
+                JOptionPane.showMessageDialog(null, "username dan password anda tidak sesuai!!\nSilahkan login Ulang ");
+            }
+        
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "koneksi "+ex.getMessage());
+        }
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -351,10 +373,10 @@ public class mainView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JPanel loginPanel;
     private javax.swing.JPanel mainpanel;
     private javax.swing.JPanel menupanel;
+    private javax.swing.JPasswordField passText;
+    private javax.swing.JTextField usernameText;
     // End of variables declaration//GEN-END:variables
 }
