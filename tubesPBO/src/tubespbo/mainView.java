@@ -5,23 +5,49 @@
  */
 package tubespbo;
 
-import java.awt.Frame;
 import java.sql.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Date;  
+import java.text.DateFormat;  
+import java.text.SimpleDateFormat;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import static tubespbo.konfig.koneksi;
-
+import javax.swing.table.DefaultTableModel;
 import koneksi.conek;
+
 /**
  *
  * @author samNOLIMIT
  */
 public class mainView extends javax.swing.JFrame {
-
+    
+public void tampil_data(){
+    
+    DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("No. Antrian");
+        model.addColumn("Nama Pemilik");
+        model.addColumn("Tanggal");
+        model.addColumn("Berat");
+        model.addColumn("Harga");
+        model.addColumn("Status");
+        model.addColumn("Tanggal diterima");
+        //tabel.setModel(model);
+       
+        
+        try{
+            String strSelect = ("select * from produk");
+            com.mysql.jdbc.Statement Select = (com.mysql.jdbc.Statement) conek.GetConnection().createStatement();
+            ResultSet rset = Select.executeQuery(strSelect);
+            while(rset.next()){
+                model.addRow(new Object[]{rset.getInt(1),rset.getDate(2),rset.getString(3),rset.getFloat(4),rset.getFloat(5),rset.getString(6),rset.getString(7)});   
+            }
+            tampilTabelHome.setModel(model);
+            
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "data Gagal Di UPDATE"+ex.getMessage());
+        }
+}
     /**
      * Creates new form mainView
      */
@@ -53,6 +79,8 @@ public class mainView extends javax.swing.JFrame {
         homePanel = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tampilTabelHome = new javax.swing.JTable();
         loginPanel = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -61,7 +89,6 @@ public class mainView extends javax.swing.JFrame {
         usernameText = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Aplikasi Laundry");
 
         bodyPanel.setBackground(new java.awt.Color(255, 195, 18));
@@ -147,6 +174,19 @@ public class mainView extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("silahkan cek pakaian anda");
 
+        tampilTabelHome.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tampilTabelHome);
+
         javax.swing.GroupLayout homePanelLayout = new javax.swing.GroupLayout(homePanel);
         homePanel.setLayout(homePanelLayout);
         homePanelLayout.setHorizontalGroup(
@@ -159,6 +199,10 @@ public class mainView extends javax.swing.JFrame {
                 .addGap(234, 234, 234)
                 .addComponent(jLabel3)
                 .addContainerGap(234, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, homePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1)
+                .addContainerGap())
         );
         homePanelLayout.setVerticalGroup(
             homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -167,7 +211,8 @@ public class mainView extends javax.swing.JFrame {
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
-                .addContainerGap(342, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         mainpanel.add(homePanel, "card2");
@@ -230,7 +275,7 @@ public class mainView extends javax.swing.JFrame {
                     .addComponent(passText, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addContainerGap(103, Short.MAX_VALUE))
+                .addContainerGap(194, Short.MAX_VALUE))
         );
 
         mainpanel.add(loginPanel, "card3");
@@ -283,6 +328,7 @@ public class mainView extends javax.swing.JFrame {
         mainpanel.add(homePanel);
         mainpanel.repaint();
         mainpanel.revalidate();
+        tampil_data();
     }//GEN-LAST:event_btnHome1ActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
@@ -373,10 +419,12 @@ public class mainView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel loginPanel;
     private javax.swing.JPanel mainpanel;
     private javax.swing.JPanel menupanel;
     private javax.swing.JPasswordField passText;
+    private javax.swing.JTable tampilTabelHome;
     private javax.swing.JTextField usernameText;
     // End of variables declaration//GEN-END:variables
 }

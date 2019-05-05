@@ -5,21 +5,55 @@
  */
 package tubespbo;
 
+import com.mysql.jdbc.Statement;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import koneksi.conek;
+import java.sql.*;
+import java.util.Date;  
+import java.text.DateFormat;  
+import java.text.SimpleDateFormat;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author samNOLIMIT
  */
 public class kasir extends javax.swing.JFrame {
+    public float harga;
+    
+    private String getTanggal() {  
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");  
+        Date date = new Date();  
+        return dateFormat.format(date);  
+    }
+    
     public void kosongkan_form(){
         namaPelangganText.setText(null);
         beratPakaianText.setText(null);
         hargaText.setText(null);
     }
     
-    public void tampilKasirInput(){
+    public void tampilKasirUpdate(){
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("No. Antrian");
+        model.addColumn("Nama Pemilik");
+        model.addColumn("Status");
+       
         
+        try{
+            int no_antrian=0;
+            String strSelect = ("select no_antrian,nama_pemilik,status from produk");
+            Statement Select = (Statement) conek.GetConnection().createStatement();
+            ResultSet rset = Select.executeQuery(strSelect);
+            while(rset.next()){
+                model.addRow(new Object[]{rset.getInt(1),rset.getString(2),rset.getString(3)});   
+            }
+            tabelUpdate.setModel(model);
+            
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "data Gagal Di UPDATE"+ex.getMessage());
+        }
     }
     
 
@@ -65,6 +99,8 @@ public class kasir extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox();
         jButton1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabelUpdate = new javax.swing.JTable();
 
         bodyKasir.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -133,9 +169,19 @@ public class kasir extends javax.swing.JFrame {
         jLabel5.setText("Harga");
 
         btnConvert.setIcon(new javax.swing.ImageIcon("C:\\Users\\samNOLIMIT\\Documents\\TUBES PBO\\logo\\icons8-currency-exchange-24.png")); // NOI18N
+        btnConvert.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConvertActionPerformed(evt);
+            }
+        });
 
         btnInputKasir.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         btnInputKasir.setText("INPUT");
+        btnInputKasir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInputKasirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout inputPanelLayout = new javax.swing.GroupLayout(inputPanel);
         inputPanel.setLayout(inputPanelLayout);
@@ -190,7 +236,7 @@ public class kasir extends javax.swing.JFrame {
                             .addComponent(hargaText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addComponent(btnInputKasir, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(171, Short.MAX_VALUE))
         );
 
         mainKasir.add(inputPanel, "card2");
@@ -206,10 +252,23 @@ public class kasir extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Century Gothic", 1, 11)); // NOI18N
         jLabel8.setText("UPDATE STATUS");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "SELESAI", "BELUM SELESAI" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "SELESAI", "DITERIMA" }));
 
         jButton1.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         jButton1.setText("UPDATE");
+
+        tabelUpdate.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tabelUpdate);
 
         javax.swing.GroupLayout updatePanelLayout = new javax.swing.GroupLayout(updatePanel);
         updatePanel.setLayout(updatePanelLayout);
@@ -218,6 +277,7 @@ public class kasir extends javax.swing.JFrame {
             .addGroup(updatePanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
                     .addGroup(updatePanelLayout.createSequentialGroup()
                         .addGroup(updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel8)
@@ -226,26 +286,31 @@ public class kasir extends javax.swing.JFrame {
                         .addGroup(updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(tampilNoAntrian, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jLabel6)
                     .addComponent(jButton1))
-                .addContainerGap(482, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         updatePanelLayout.setVerticalGroup(
             updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(updatePanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel6)
-                .addGap(18, 18, 18)
-                .addGroup(updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(tampilNoAntrian, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addContainerGap(153, Short.MAX_VALUE))
+                .addGroup(updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addGroup(updatePanelLayout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(18, 18, 18)
+                        .addGroup(updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(tampilNoAntrian, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel8)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         mainKasir.add(updatePanel, "card3");
@@ -309,7 +374,45 @@ public class kasir extends javax.swing.JFrame {
         mainKasir.add(updatePanel);
         mainKasir.repaint();
         mainKasir.revalidate();
+        tampilKasirUpdate();
     }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnInputKasirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInputKasirActionPerformed
+        // TODO add your handling code here:
+
+           try{
+                //menghitung banyak no antrian
+                int no_antrian=0;
+                String strSelect = ("select no_antrian from produk");
+                Statement Select = (Statement) conek.GetConnection().createStatement();
+                ResultSet rset = Select.executeQuery(strSelect);
+                while(rset.next()){
+                    no_antrian++;
+                }
+                //input data produk setelah nomor antrian terakhir diketahui
+                Statement statement = (Statement) conek.GetConnection().createStatement();
+                statement.executeUpdate("insert into produk VALUES (" + no_antrian++ +",'"+getTanggal()+"','"+namaPelangganText.getText()+"','"+beratPakaianText.getText()+"',"+harga+",'Dalam Antrian"+"','0000-00-00"+"');");
+                statement.close ();
+                JOptionPane.showMessageDialog(null, "data berhasil disimpan");
+                kosongkan_form();
+                //this.dispose();
+            }catch (Exception t){
+                
+            JOptionPane.showMessageDialog(null, "data gagal disimpan");
+            }
+        
+        
+    }//GEN-LAST:event_btnInputKasirActionPerformed
+
+    private void btnConvertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConvertActionPerformed
+        // TODO add your handling code here:
+        String berat=beratPakaianText.getText();
+        float Harga;
+        Harga=Float.parseFloat(berat) * 5000;
+        berat=String.valueOf(Harga);
+        this.harga=Harga;
+        hargaText.setText(berat);
+    }//GEN-LAST:event_btnConvertActionPerformed
 
     /**
      * @param args the command line arguments
@@ -365,9 +468,11 @@ public class kasir extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel mainKasir;
     private javax.swing.JPanel menuKasir;
     private javax.swing.JTextField namaPelangganText;
+    private javax.swing.JTable tabelUpdate;
     private javax.swing.JTextField tampilNoAntrian;
     private javax.swing.JPanel updatePanel;
     // End of variables declaration//GEN-END:variables
