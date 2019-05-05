@@ -26,8 +26,8 @@ public void tampil_data(){
     
     DefaultTableModel model = new DefaultTableModel();
         model.addColumn("No. Antrian");
-        model.addColumn("Nama Pemilik");
         model.addColumn("Tanggal");
+        model.addColumn("Nama Pemilik");
         model.addColumn("Berat");
         model.addColumn("Harga");
         model.addColumn("Status");
@@ -71,10 +71,11 @@ public void tampil_data(){
         bodyPanel = new javax.swing.JPanel();
         menupanel = new javax.swing.JPanel();
         btnHome1 = new javax.swing.JButton();
-        btnLogin = new javax.swing.JButton();
+        btnKaryawanLogin = new javax.swing.JButton();
         btnTentang = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        btnLogin1 = new javax.swing.JButton();
         mainpanel = new javax.swing.JPanel();
         homePanel = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -88,6 +89,13 @@ public void tampil_data(){
         passText = new javax.swing.JPasswordField();
         usernameText = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        loginkar = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        userkartext = new javax.swing.JTextField();
+        passwordkartext = new javax.swing.JPasswordField();
+        btnMasukKar = new javax.swing.JButton();
 
         setTitle("Aplikasi Laundry");
 
@@ -105,12 +113,12 @@ public void tampil_data(){
             }
         });
 
-        btnLogin.setBackground(new java.awt.Color(196, 229, 56));
-        btnLogin.setIcon(new javax.swing.ImageIcon("C:\\Users\\samNOLIMIT\\Documents\\TUBES PBO\\logo\\icons8-user-24.png")); // NOI18N
-        btnLogin.setText("LOGIN");
-        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+        btnKaryawanLogin.setBackground(new java.awt.Color(196, 229, 56));
+        btnKaryawanLogin.setIcon(new javax.swing.ImageIcon("C:\\Users\\samNOLIMIT\\Documents\\TUBES PBO\\logo\\icons8-user-24.png")); // NOI18N
+        btnKaryawanLogin.setText("Karyawan LOGIN");
+        btnKaryawanLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLoginActionPerformed(evt);
+                btnKaryawanLoginActionPerformed(evt);
             }
         });
 
@@ -127,6 +135,15 @@ public void tampil_data(){
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel2.setText("LAUNDRY ASRAMA ITERA");
 
+        btnLogin1.setBackground(new java.awt.Color(196, 229, 56));
+        btnLogin1.setIcon(new javax.swing.ImageIcon("C:\\Users\\samNOLIMIT\\Documents\\TUBES PBO\\logo\\icons8-user-24.png")); // NOI18N
+        btnLogin1.setText("Kasir LOGIN");
+        btnLogin1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogin1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout menupanelLayout = new javax.swing.GroupLayout(menupanel);
         menupanel.setLayout(menupanelLayout);
         menupanelLayout.setHorizontalGroup(
@@ -136,13 +153,15 @@ public void tampil_data(){
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnHome1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48)
-                .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnLogin1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnKaryawanLogin)
+                .addGap(18, 18, 18)
                 .addComponent(btnTentang)
-                .addGap(51, 51, 51))
+                .addContainerGap())
         );
         menupanelLayout.setVerticalGroup(
             menupanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -150,10 +169,11 @@ public void tampil_data(){
                 .addContainerGap()
                 .addGroup(menupanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(menupanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnKaryawanLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnTentang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnHome1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel2))
+                        .addComponent(jLabel2)
+                        .addComponent(btnLogin1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(menupanelLayout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -280,6 +300,72 @@ public void tampil_data(){
 
         mainpanel.add(loginPanel, "card3");
 
+        loginkar.setBackground(new java.awt.Color(204, 204, 255));
+        loginkar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white));
+
+        jLabel8.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        jLabel8.setText("Karyawan Masuk");
+
+        jLabel9.setIcon(new javax.swing.ImageIcon("C:\\Users\\samNOLIMIT\\Documents\\TUBES PBO\\logo\\icons8-user-24.png")); // NOI18N
+
+        jLabel10.setIcon(new javax.swing.ImageIcon("C:\\Users\\samNOLIMIT\\Documents\\TUBES PBO\\logo\\icons8-lock-24.png")); // NOI18N
+
+        btnMasukKar.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        btnMasukKar.setText("Masuk");
+        btnMasukKar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMasukKarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout loginkarLayout = new javax.swing.GroupLayout(loginkar);
+        loginkar.setLayout(loginkarLayout);
+        loginkarLayout.setHorizontalGroup(
+            loginkarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(loginkarLayout.createSequentialGroup()
+                .addGap(218, 218, 218)
+                .addGroup(loginkarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel9)
+                    .addGroup(loginkarLayout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addGap(18, 18, 18)
+                        .addGroup(loginkarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
+                            .addComponent(passwordkartext))))
+                .addContainerGap(237, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, loginkarLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnMasukKar)
+                .addGap(309, 309, 309))
+            .addGroup(loginkarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(loginkarLayout.createSequentialGroup()
+                    .addGap(261, 261, 261)
+                    .addComponent(userkartext, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(237, Short.MAX_VALUE)))
+        );
+        loginkarLayout.setVerticalGroup(
+            loginkarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(loginkarLayout.createSequentialGroup()
+                .addGap(146, 146, 146)
+                .addComponent(jLabel8)
+                .addGap(20, 20, 20)
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addGroup(loginkarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel10)
+                    .addComponent(passwordkartext, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(btnMasukKar)
+                .addContainerGap(141, Short.MAX_VALUE))
+            .addGroup(loginkarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(loginkarLayout.createSequentialGroup()
+                    .addGap(199, 199, 199)
+                    .addComponent(userkartext, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(253, Short.MAX_VALUE)))
+        );
+
+        mainpanel.add(loginkar, "card4");
+
         javax.swing.GroupLayout bodyPanelLayout = new javax.swing.GroupLayout(bodyPanel);
         bodyPanel.setLayout(bodyPanelLayout);
         bodyPanelLayout.setHorizontalGroup(
@@ -331,7 +417,7 @@ public void tampil_data(){
         tampil_data();
     }//GEN-LAST:event_btnHome1ActionPerformed
 
-    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+    private void btnKaryawanLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKaryawanLoginActionPerformed
         // TODO add your handling code here:
         //remove semua panel
         mainpanel.removeAll();
@@ -339,10 +425,10 @@ public void tampil_data(){
         mainpanel.revalidate();
         
         //add panel
-        mainpanel.add(loginPanel);
+        mainpanel.add(loginkar);
         mainpanel.repaint();
         mainpanel.revalidate();
-    }//GEN-LAST:event_btnLoginActionPerformed
+    }//GEN-LAST:event_btnKaryawanLoginActionPerformed
 
     private void btnTentangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTentangActionPerformed
         // TODO add your handling code here:
@@ -369,6 +455,40 @@ public void tampil_data(){
         }
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnLogin1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogin1ActionPerformed
+        // TODO add your handling code here:
+        //remove semua panel
+        mainpanel.removeAll();
+        mainpanel.repaint();
+        mainpanel.revalidate();
+        
+        //add panel
+        mainpanel.add(loginPanel);
+        mainpanel.repaint();
+        mainpanel.revalidate();
+        
+    }//GEN-LAST:event_btnLogin1ActionPerformed
+
+    private void btnMasukKarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMasukKarActionPerformed
+        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            
+            String log =("select * from login_karyawan where usernameKAR='"+userkartext.getText()+"' and passwordKAR='"+passwordkartext.getText()+"'");
+            Statement conn =(Statement) conek.GetConnection().createStatement();
+            ResultSet login = conn.executeQuery(log);
+            if(login.next()){
+                karyawan u = new karyawan();
+                u.setVisible(true);
+            }else{
+                JOptionPane.showMessageDialog(null, "username dan password anda tidak sesuai!!\nSilahkan login Ulang ");
+            }
+        
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "koneksi "+ex.getMessage());
+        }
+    }//GEN-LAST:event_btnMasukKarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -408,23 +528,31 @@ public void tampil_data(){
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bodyPanel;
     private javax.swing.JButton btnHome1;
-    private javax.swing.JButton btnLogin;
+    private javax.swing.JButton btnKaryawanLogin;
+    private javax.swing.JButton btnLogin1;
+    private javax.swing.JButton btnMasukKar;
     private javax.swing.JButton btnTentang;
     private javax.swing.JPanel homePanel;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel loginPanel;
+    private javax.swing.JPanel loginkar;
     private javax.swing.JPanel mainpanel;
     private javax.swing.JPanel menupanel;
     private javax.swing.JPasswordField passText;
+    private javax.swing.JPasswordField passwordkartext;
     private javax.swing.JTable tampilTabelHome;
+    private javax.swing.JTextField userkartext;
     private javax.swing.JTextField usernameText;
     // End of variables declaration//GEN-END:variables
 }

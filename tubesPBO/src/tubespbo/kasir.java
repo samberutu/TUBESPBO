@@ -97,10 +97,11 @@ public class kasir extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         tampilNoAntrian = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        statusCombo = new javax.swing.JComboBox();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelUpdate = new javax.swing.JTable();
+        btnRefres = new javax.swing.JButton();
 
         bodyKasir.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -247,15 +248,20 @@ public class kasir extends javax.swing.JFrame {
         jLabel6.setText("update data");
 
         jLabel7.setFont(new java.awt.Font("Century Gothic", 1, 11)); // NOI18N
-        jLabel7.setText("NO ANTRIAN");
+        jLabel7.setText("NO. Antrian");
 
         jLabel8.setFont(new java.awt.Font("Century Gothic", 1, 11)); // NOI18N
         jLabel8.setText("UPDATE STATUS");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "SELESAI", "DITERIMA" }));
+        statusCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "DITERIMA" }));
 
         jButton1.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         jButton1.setText("UPDATE");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         tabelUpdate.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -268,13 +274,26 @@ public class kasir extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tabelUpdate.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelUpdateMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tabelUpdate);
+
+        btnRefres.setIcon(new javax.swing.ImageIcon("C:\\Users\\samNOLIMIT\\Documents\\TUBES PBO\\logo\\icons8-update-24.png")); // NOI18N
+        btnRefres.setText("Refresh");
+        btnRefres.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefresActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout updatePanelLayout = new javax.swing.GroupLayout(updatePanel);
         updatePanel.setLayout(updatePanelLayout);
         updatePanelLayout.setHorizontalGroup(
             updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(updatePanelLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, updatePanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
@@ -284,32 +303,36 @@ public class kasir extends javax.swing.JFrame {
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tampilNoAntrian, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(statusCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tampilNoAntrian, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)))
                     .addComponent(jButton1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnRefres)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         updatePanelLayout.setVerticalGroup(
             updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(updatePanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(updatePanelLayout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addGap(18, 18, 18)
-                        .addGroup(updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7)
-                            .addComponent(tampilNoAntrian, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel8)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton1)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(67, 67, 67)
+                .addComponent(jLabel6)
+                .addGap(18, 18, 18)
+                .addGroup(updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(tampilNoAntrian, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(statusCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addContainerGap(232, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, updatePanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnRefres)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -414,6 +437,36 @@ public class kasir extends javax.swing.JFrame {
         hargaText.setText(berat);
     }//GEN-LAST:event_btnConvertActionPerformed
 
+    private void tabelUpdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelUpdateMouseClicked
+        // TODO add your handling code here:
+        int baris = tabelUpdate.rowAtPoint(evt.getPoint());
+        String antri = tabelUpdate.getValueAt(baris, 0).toString();
+        tampilNoAntrian.setText(antri);
+    }//GEN-LAST:event_tabelUpdateMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        String update = "UPDATE produk set status='"+statusCombo.getSelectedItem()+"',tgl_diterima='"+getTanggal()+"' WHERE no_antrian="+tampilNoAntrian.getText();
+        try{
+            Statement statement = (Statement) conek.GetConnection().createStatement();
+            statement.executeUpdate(update);
+            statement.close ();
+            JOptionPane.showMessageDialog(null, "data berhasil diupdate");
+            tampilKasirUpdate();
+            tampilNoAntrian.setText(null);
+            
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "data gagal diUPDATE"+ex.getMessage());
+        }
+        
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnRefresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefresActionPerformed
+        // TODO add your handling code here:
+        tampilKasirUpdate();
+    }//GEN-LAST:event_btnRefresActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -455,11 +508,11 @@ public class kasir extends javax.swing.JFrame {
     private javax.swing.JButton btnConvert;
     private javax.swing.JButton btnInput;
     private javax.swing.JButton btnInputKasir;
+    private javax.swing.JButton btnRefres;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JTextField hargaText;
     private javax.swing.JPanel inputPanel;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -472,6 +525,7 @@ public class kasir extends javax.swing.JFrame {
     private javax.swing.JPanel mainKasir;
     private javax.swing.JPanel menuKasir;
     private javax.swing.JTextField namaPelangganText;
+    private javax.swing.JComboBox statusCombo;
     private javax.swing.JTable tabelUpdate;
     private javax.swing.JTextField tampilNoAntrian;
     private javax.swing.JPanel updatePanel;
