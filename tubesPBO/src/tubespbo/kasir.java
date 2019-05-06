@@ -81,6 +81,7 @@ public class kasir extends javax.swing.JFrame {
         btnUpdate = new javax.swing.JButton();
         btnInput = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        btnUpdate1 = new javax.swing.JButton();
         mainKasir = new javax.swing.JPanel();
         inputPanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -102,6 +103,8 @@ public class kasir extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelUpdate = new javax.swing.JTable();
         btnRefres = new javax.swing.JButton();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         bodyKasir.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -127,6 +130,14 @@ public class kasir extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         jLabel1.setText("Kasir Laundry");
 
+        btnUpdate1.setIcon(new javax.swing.ImageIcon("C:\\Users\\samNOLIMIT\\Downloads\\icons8-exit-32.png")); // NOI18N
+        btnUpdate1.setText("LOGOUT");
+        btnUpdate1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdate1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout menuKasirLayout = new javax.swing.GroupLayout(menuKasir);
         menuKasir.setLayout(menuKasirLayout);
         menuKasirLayout.setHorizontalGroup(
@@ -134,11 +145,13 @@ public class kasir extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuKasirLayout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(93, 93, 93)
                 .addComponent(btnInput)
-                .addGap(51, 51, 51)
+                .addGap(39, 39, 39)
                 .addComponent(btnUpdate)
-                .addGap(94, 94, 94))
+                .addGap(41, 41, 41)
+                .addComponent(btnUpdate1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         menuKasirLayout.setVerticalGroup(
             menuKasirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -147,8 +160,9 @@ public class kasir extends javax.swing.JFrame {
                 .addGroup(menuKasirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnUpdate)
                     .addComponent(btnInput)
-                    .addComponent(jLabel1))
-                .addGap(30, 30, 30))
+                    .addComponent(jLabel1)
+                    .addComponent(btnUpdate1))
+                .addGap(32, 32, 32))
         );
 
         mainKasir.setBackground(new java.awt.Color(255, 255, 255));
@@ -237,7 +251,7 @@ public class kasir extends javax.swing.JFrame {
                             .addComponent(hargaText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addComponent(btnInputKasir, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(171, Short.MAX_VALUE))
+                .addContainerGap(165, Short.MAX_VALUE))
         );
 
         mainKasir.add(inputPanel, "card2");
@@ -327,7 +341,7 @@ public class kasir extends javax.swing.JFrame {
                     .addComponent(statusCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addContainerGap(232, Short.MAX_VALUE))
+                .addContainerGap(226, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, updatePanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnRefres)
@@ -467,6 +481,17 @@ public class kasir extends javax.swing.JFrame {
         tampilKasirUpdate();
     }//GEN-LAST:event_btnRefresActionPerformed
 
+    private void btnUpdate1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdate1ActionPerformed
+        // TODO add your handling code here:
+        int pesan = JOptionPane.showConfirmDialog(null,"yakin ?", "konfirmasi", JOptionPane.YES_NO_OPTION
+                , JOptionPane.QUESTION_MESSAGE);
+        if(pesan==JOptionPane.YES_OPTION){
+            mainView a = new mainView();
+            a.setVisible(true);
+            this.dispose();
+        }
+    }//GEN-LAST:event_btnUpdate1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -510,6 +535,7 @@ public class kasir extends javax.swing.JFrame {
     private javax.swing.JButton btnInputKasir;
     private javax.swing.JButton btnRefres;
     private javax.swing.JButton btnUpdate;
+    private javax.swing.JButton btnUpdate1;
     private javax.swing.JTextField hargaText;
     private javax.swing.JPanel inputPanel;
     private javax.swing.JButton jButton1;

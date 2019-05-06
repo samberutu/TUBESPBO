@@ -8,9 +8,6 @@ package tubespbo;
 import java.sql.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;  
-import java.text.DateFormat;  
-import java.text.SimpleDateFormat;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -97,6 +94,7 @@ public void tampil_data(){
         passwordkartext = new javax.swing.JPasswordField();
         btnMasukKar = new javax.swing.JButton();
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Aplikasi Laundry");
 
         bodyPanel.setBackground(new java.awt.Color(255, 195, 18));
@@ -156,8 +154,8 @@ public void tampil_data(){
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnHome1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnLogin1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnLogin1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnKaryawanLogin)
                 .addGap(18, 18, 18)
                 .addComponent(btnTentang)
@@ -446,6 +444,7 @@ public void tampil_data(){
             if(login.next()){
                 kasir u = new kasir();
                 u.setVisible(true);
+                this.dispose();
             }else{
                 JOptionPane.showMessageDialog(null, "username dan password anda tidak sesuai!!\nSilahkan login Ulang ");
             }
@@ -481,7 +480,9 @@ public void tampil_data(){
             if(login.next()){
                 karyawan u = new karyawan();
                 u.setVisible(true);
+                this.dispose();
             }else{
+                
                 JOptionPane.showMessageDialog(null, "username dan password anda tidak sesuai!!\nSilahkan login Ulang ");
             }
         
