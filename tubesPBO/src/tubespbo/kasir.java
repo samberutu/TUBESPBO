@@ -13,6 +13,8 @@ import java.sql.*;
 import java.util.Date;  
 import java.text.DateFormat;  
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -21,11 +23,23 @@ import javax.swing.table.DefaultTableModel;
  */
 public class kasir extends javax.swing.JFrame {
     public float harga;
+    HashMap<Integer,String> hari = new HashMap<Integer,String>();
     
     private String getTanggal() {  
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");  
         Date date = new Date();  
         return dateFormat.format(date);  
+    }
+    public void tampilhari(){
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("No. Antrian");
+        model.addColumn("Nama Pemilik");
+        int a = hari.size();
+        for(Map.Entry g : hari.entrySet()){
+            model.addRow(new Object[]{g.getKey(),g.getValue()});
+        }
+        tabelhari1.setModel(model);
+        
     }
     
     public void kosongkan_form(){
@@ -43,7 +57,7 @@ public class kasir extends javax.swing.JFrame {
         
         try{
             int no_antrian=0;
-            String strSelect = ("select no_antrian,nama_pemilik,status from produk");
+            String strSelect = ("select no_antrian,nama_pemilik,status from produk where status='SELESAI'");
             Statement Select = (Statement) conek.GetConnection().createStatement();
             ResultSet rset = Select.executeQuery(strSelect);
             while(rset.next()){
@@ -82,6 +96,7 @@ public class kasir extends javax.swing.JFrame {
         btnInput = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         btnUpdate1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         mainKasir = new javax.swing.JPanel();
         inputPanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -98,11 +113,14 @@ public class kasir extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         tampilNoAntrian = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        statusCombo = new javax.swing.JComboBox();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelUpdate = new javax.swing.JTable();
-        btnRefres = new javax.swing.JButton();
+        hargaKasir = new javax.swing.JTextField();
+        sunPanel = new javax.swing.JPanel();
+        tabelhari = new javax.swing.JScrollPane();
+        tabelhari1 = new javax.swing.JTable();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -138,6 +156,13 @@ public class kasir extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setIcon(new javax.swing.ImageIcon("C:\\Users\\samNOLIMIT\\Downloads\\icons8-sun-32.png")); // NOI18N
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout menuKasirLayout = new javax.swing.GroupLayout(menuKasir);
         menuKasir.setLayout(menuKasirLayout);
         menuKasirLayout.setHorizontalGroup(
@@ -145,18 +170,22 @@ public class kasir extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuKasirLayout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addComponent(jLabel1)
-                .addGap(93, 93, 93)
+                .addGap(86, 86, 86)
                 .addComponent(btnInput)
-                .addGap(39, 39, 39)
+                .addGap(50, 50, 50)
                 .addComponent(btnUpdate)
-                .addGap(41, 41, 41)
+                .addGap(29, 29, 29)
                 .addComponent(btnUpdate1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuKasirLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         menuKasirLayout.setVerticalGroup(
             menuKasirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuKasirLayout.createSequentialGroup()
-                .addContainerGap(47, Short.MAX_VALUE)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addGroup(menuKasirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnUpdate)
                     .addComponent(btnInput)
@@ -221,7 +250,7 @@ public class kasir extends javax.swing.JFrame {
                                 .addComponent(hargaText, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnConvert, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))))
-                .addContainerGap(207, Short.MAX_VALUE))
+                .addContainerGap(253, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, inputPanelLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(btnInputKasir, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -251,7 +280,7 @@ public class kasir extends javax.swing.JFrame {
                             .addComponent(hargaText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addComponent(btnInputKasir, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(165, Short.MAX_VALUE))
+                .addContainerGap(171, Short.MAX_VALUE))
         );
 
         mainKasir.add(inputPanel, "card2");
@@ -265,9 +294,7 @@ public class kasir extends javax.swing.JFrame {
         jLabel7.setText("NO. Antrian");
 
         jLabel8.setFont(new java.awt.Font("Century Gothic", 1, 11)); // NOI18N
-        jLabel8.setText("UPDATE STATUS");
-
-        statusCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "DITERIMA" }));
+        jLabel8.setText("HARGA PAKAIAN");
 
         jButton1.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         jButton1.setText("UPDATE");
@@ -295,14 +322,6 @@ public class kasir extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tabelUpdate);
 
-        btnRefres.setIcon(new javax.swing.ImageIcon("C:\\Users\\samNOLIMIT\\Documents\\TUBES PBO\\logo\\icons8-update-24.png")); // NOI18N
-        btnRefres.setText("Refresh");
-        btnRefres.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRefresActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout updatePanelLayout = new javax.swing.GroupLayout(updatePanel);
         updatePanel.setLayout(updatePanelLayout);
         updatePanelLayout.setHorizontalGroup(
@@ -317,13 +336,11 @@ public class kasir extends javax.swing.JFrame {
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(statusCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tampilNoAntrian, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)))
+                            .addComponent(tampilNoAntrian, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
+                            .addComponent(hargaKasir)))
                     .addComponent(jButton1))
                 .addGap(18, 18, 18)
-                .addGroup(updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnRefres)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         updatePanelLayout.setVerticalGroup(
@@ -338,19 +355,62 @@ public class kasir extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(updatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(statusCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(hargaKasir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addContainerGap(226, Short.MAX_VALUE))
+                .addContainerGap(232, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, updatePanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnRefres)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
         mainKasir.add(updatePanel, "card3");
+
+        sunPanel.setBackground(new java.awt.Color(204, 0, 204));
+
+        tabelhari1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tabelhari.setViewportView(tabelhari1);
+
+        jLabel9.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel9.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("Pelanggan Masuk");
+
+        javax.swing.GroupLayout sunPanelLayout = new javax.swing.GroupLayout(sunPanel);
+        sunPanel.setLayout(sunPanelLayout);
+        sunPanelLayout.setHorizontalGroup(
+            sunPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(sunPanelLayout.createSequentialGroup()
+                .addGap(287, 287, 287)
+                .addComponent(jLabel9)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sunPanelLayout.createSequentialGroup()
+                .addContainerGap(144, Short.MAX_VALUE)
+                .addComponent(tabelhari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(141, 141, 141))
+        );
+        sunPanelLayout.setVerticalGroup(
+            sunPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sunPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(tabelhari, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(44, Short.MAX_VALUE))
+        );
+
+        mainKasir.add(sunPanel, "card4");
 
         javax.swing.GroupLayout bodyKasirLayout = new javax.swing.GroupLayout(bodyKasir);
         bodyKasir.setLayout(bodyKasirLayout);
@@ -395,7 +455,7 @@ public class kasir extends javax.swing.JFrame {
         mainKasir.revalidate();
         
         //add panel
-        mainKasir.add(inputPanel);
+        mainKasir.add(inputPanel);//memanggil input panel
         mainKasir.repaint();
         mainKasir.revalidate();
     }//GEN-LAST:event_btnInputActionPerformed
@@ -408,7 +468,7 @@ public class kasir extends javax.swing.JFrame {
         mainKasir.revalidate();
         
         //add panel
-        mainKasir.add(updatePanel);
+        mainKasir.add(updatePanel); //memanggil update panel
         mainKasir.repaint();
         mainKasir.revalidate();
         tampilKasirUpdate();
@@ -416,28 +476,38 @@ public class kasir extends javax.swing.JFrame {
 
     private void btnInputKasirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInputKasirActionPerformed
         // TODO add your handling code here:
-
+            //String kosong=null;
+        
            try{
                 //menghitung banyak no antrian
                 int no_antrian=0;
-                String strSelect = ("select no_antrian from produk");
+                String strSelect = ("select no_antrian from produk"); //query untuk nomor antrian
                 Statement Select = (Statement) conek.GetConnection().createStatement();
                 ResultSet rset = Select.executeQuery(strSelect);
                 while(rset.next()){
-                    no_antrian++;
+                    no_antrian++; //menambah no antrian dengan menghitung banyak data di tabel
                 }
                 //input data produk setelah nomor antrian terakhir diketahui
+                //System.out.println(usernameLabel.getText());
                 Statement statement = (Statement) conek.GetConnection().createStatement();
-                statement.executeUpdate("insert into produk VALUES (" + no_antrian++ +",'"+getTanggal()+"','"+namaPelangganText.getText()+"','"+beratPakaianText.getText()+"',"+harga+",'Dalam Antrian"+"','0000-00-00"+"');");
+                statement.executeUpdate("insert into produk VALUES (" + no_antrian +",'"+getTanggal()+"','"
+                        +namaPelangganText.getText()+"','"
+                        +beratPakaianText.getText()+"',"+harga
+                        +",'Dalam Antrian"+"','0000-00-00"+"');"); //query untk perintah sql
                 statement.close ();
+                
                 JOptionPane.showMessageDialog(null, "data berhasil disimpan");
+                hari.put(no_antrian, namaPelangganText.getText()); //mengisi data sementara inputan 
                 kosongkan_form();
+               
+                
                 //this.dispose();
             }catch (Exception t){
                 
-            JOptionPane.showMessageDialog(null, "data gagal disimpan");
+            JOptionPane.showMessageDialog(null, "data gagal disimpan"+t.getMessage());
             }
-        
+           
+        this.harga=0;
         
     }//GEN-LAST:event_btnInputKasirActionPerformed
 
@@ -445,7 +515,7 @@ public class kasir extends javax.swing.JFrame {
         // TODO add your handling code here:
         String berat=beratPakaianText.getText();
         float Harga;
-        Harga=Float.parseFloat(berat) * 5000;
+        Harga=Float.parseFloat(berat) * 5000; //mengubah tipedata string menjadi float NB:Rp5000/Kg
         berat=String.valueOf(Harga);
         this.harga=Harga;
         hargaText.setText(berat);
@@ -455,12 +525,28 @@ public class kasir extends javax.swing.JFrame {
         // TODO add your handling code here:
         int baris = tabelUpdate.rowAtPoint(evt.getPoint());
         String antri = tabelUpdate.getValueAt(baris, 0).toString();
+        String hargacui = "select harga from produk where no_antrian = "+antri;
         tampilNoAntrian.setText(antri);
+        try{
+            Statement Select = (Statement) conek.GetConnection().createStatement();
+            ResultSet rset = Select.executeQuery(hargacui);
+            while(rset.next()){
+               hargaKasir.setText(rset.getString(1));
+            }
+            
+            
+            
+            
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "data gagal diUPDATE"+ex.getMessage());
+        }
     }//GEN-LAST:event_tabelUpdateMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        String update = "UPDATE produk set status='"+statusCombo.getSelectedItem()+"',tgl_diterima='"+getTanggal()+"' WHERE no_antrian="+tampilNoAntrian.getText();
+        String update = "UPDATE produk set status='DITERIMA"+
+                "',tgl_diterima='"+getTanggal()+
+                "' WHERE no_antrian="+tampilNoAntrian.getText(); //queri update tabel
         try{
             Statement statement = (Statement) conek.GetConnection().createStatement();
             statement.executeUpdate(update);
@@ -468,6 +554,7 @@ public class kasir extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "data berhasil diupdate");
             tampilKasirUpdate();
             tampilNoAntrian.setText(null);
+            hargaKasir.setText(null);
             
         }catch(SQLException ex){
             JOptionPane.showMessageDialog(null, "data gagal diUPDATE"+ex.getMessage());
@@ -475,11 +562,6 @@ public class kasir extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void btnRefresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefresActionPerformed
-        // TODO add your handling code here:
-        tampilKasirUpdate();
-    }//GEN-LAST:event_btnRefresActionPerformed
 
     private void btnUpdate1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdate1ActionPerformed
         // TODO add your handling code here:
@@ -492,40 +574,53 @@ public class kasir extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnUpdate1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        mainKasir.removeAll();
+        mainKasir.repaint();
+        mainKasir.revalidate();
+        
+        //add panel
+        mainKasir.add(sunPanel);
+        mainKasir.repaint();
+        mainKasir.revalidate();
+        tampilhari();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(kasir.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(kasir.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(kasir.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(kasir.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new kasir().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(kasir.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(kasir.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(kasir.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(kasir.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new kasir().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField beratPakaianText;
@@ -533,12 +628,13 @@ public class kasir extends javax.swing.JFrame {
     private javax.swing.JButton btnConvert;
     private javax.swing.JButton btnInput;
     private javax.swing.JButton btnInputKasir;
-    private javax.swing.JButton btnRefres;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JButton btnUpdate1;
+    private javax.swing.JTextField hargaKasir;
     private javax.swing.JTextField hargaText;
     private javax.swing.JPanel inputPanel;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -547,12 +643,15 @@ public class kasir extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel mainKasir;
     private javax.swing.JPanel menuKasir;
     private javax.swing.JTextField namaPelangganText;
-    private javax.swing.JComboBox statusCombo;
+    private javax.swing.JPanel sunPanel;
     private javax.swing.JTable tabelUpdate;
+    private javax.swing.JScrollPane tabelhari;
+    private javax.swing.JTable tabelhari1;
     private javax.swing.JTextField tampilNoAntrian;
     private javax.swing.JPanel updatePanel;
     // End of variables declaration//GEN-END:variables

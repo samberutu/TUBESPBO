@@ -8,6 +8,8 @@ package tubespbo;
 import java.sql.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -18,7 +20,11 @@ import koneksi.conek;
  * @author samNOLIMIT
  */
 public class mainView extends javax.swing.JFrame {
+    HashMap<String,String> data;
     
+    public void pakeMap(){
+        data.put(userkartext.getText(), passwordkartext.getText());
+    }
 public void tampil_data(){
     
     DefaultTableModel model = new DefaultTableModel();
@@ -49,6 +55,7 @@ public void tampil_data(){
      * Creates new form mainView
      */
     public mainView() {
+        //this.data = new Map<String,String>;
         initComponents();
         setExtendedState(JFrame.MAXIMIZED_HORIZ);
         setVisible(true);
@@ -437,11 +444,17 @@ public void tampil_data(){
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
             // TODO add your handling code here:
+            String name =usernameText.getText();
+            //dataLOGIN user = new dataLOGIN(name);
+            //System.out.println(user.getNama());
             
-            String log =("select * from login where username='"+usernameText.getText()+"' and password='"+passText.getText()+"'");
+            String log =("select username,password from login where username='"+usernameText.getText()+"' and password='"+passText.getText()+"'");
             Statement conn =(Statement) conek.GetConnection().createStatement();
             ResultSet login = conn.executeQuery(log);
+//            dataLOGIN a=new dataLOGIN();
+//            a.dataLOGIN(usernameText.getText());
             if(login.next()){
+                
                 kasir u = new kasir();
                 u.setVisible(true);
                 this.dispose();
@@ -471,10 +484,14 @@ public void tampil_data(){
 
     private void btnMasukKarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMasukKarActionPerformed
         // TODO add your handling code here:
+        //HashMap<Integer,String> masuk=new HashMap<Integer, String>;
+        //data.put(userkartext.getText(), passwordkartext.getText());
         try {
             // TODO add your handling code here:
             
-            String log =("select * from login_karyawan where usernameKAR='"+userkartext.getText()+"' and passwordKAR='"+passwordkartext.getText()+"'");
+            String log =("select * from login_karyawan where usernameKAR='"+userkartext.getText()
+                    +"' and passwordKAR='"
+                    +passwordkartext.getText()+"'");
             Statement conn =(Statement) conek.GetConnection().createStatement();
             ResultSet login = conn.executeQuery(log);
             if(login.next()){
